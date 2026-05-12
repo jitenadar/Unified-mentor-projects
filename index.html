@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lexora – Legal Consultation Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --navy: #0f1e35;
+      --navy-light: #162844;
+      --gold: #c9a84c;
+      --gold-light: #e8c96a;
+      --cream: #f9f6f0;
+      --white: #ffffff;
+      --text-dark: #1a1a2e;
+      --text-muted: #6b7280;
+      --text-light: #9ca3af;
+      --border: rgba(201, 168, 76, 0.2);
+      --radius: 12px;
+      --radius-lg: 20px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(15, 30, 53, 0.97);
+      backdrop-filter: blur(12px);
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+      border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--gold);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .logo span {
+      color: var(--white);
+      font-weight: 400;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255, 255, 255, 0.75);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold);
+    }
+
+    .nav-cta {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid rgba(201, 168, 76, 0.4);
+      color: var(--gold);
+      padding: 0.5rem 1.25rem;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .btn-ghost:hover {
+      background: rgba(201, 168, 76, 0.1);
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      border: none;
+      color: var(--navy);
+      padding: 0.5rem 1.25rem;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .btn-gold:hover {
+      background: var(--gold-light);
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      background: var(--navy);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 8% 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201, 168, 76, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '§';
+      position: absolute;
+      right: 8%;
+      bottom: 10%;
+      font-size: 18rem;
+      color: rgba(201, 168, 76, 0.04);
+      font-family: 'Playfair Display', serif;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(201, 168, 76, 0.12);
+      border: 1px solid rgba(201, 168, 76, 0.25);
+      color: var(--gold);
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 0.4rem 0.9rem;
+      border-radius: 100px;
+      margin-bottom: 1.75rem;
+      width: fit-content;
+      letter-spacing: 0.5px;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      color: var(--white);
+      line-height: 1.12;
+      max-width: 700px;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero h1 em {
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    .hero p {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 1.1rem;
+      max-width: 540px;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 4rem;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--navy);
+      border: none;
+      padding: 0.85rem 2rem;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: all 0.25s;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      padding: 0.85rem 2rem;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: all 0.25s;
+    }
+
+    .btn-outline:hover {
+      border-color: rgba(201, 168, 76, 0.5);
+      color: var(--gold);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .stat {}
+
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .stat-label {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.8rem;
+      font-weight: 400;
+      margin-top: 2px;
+      letter-spacing: 0.3px;
+    }
+
+    /* SEARCH BAR */
+    .search-section {
+      background: var(--white);
+      padding: 3rem 8%;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06);
+    }
+
+    .search-box {
+      background: var(--cream);
+      border: 1px solid rgba(201, 168, 76, 0.2);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem 2rem;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .search-field {
+      flex: 1;
+      min-width: 180px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .search-field label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .search-field select,
+    .search-field input {
+      border: none;
+      background: transparent;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      outline: none;
+      font-weight: 500;
+    }
+
+    .search-divider {
+      width: 1px;
+      height: 40px;
+      background: rgba(201, 168, 76, 0.2);
+    }
+
+    .search-btn {
+      background: var(--navy);
+      color: var(--white);
+      border: none;
+      padding: 0.85rem 2rem;
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+
+    .search-btn:hover {
+      background: var(--navy-light);
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 5rem 8%;
+    }
+
+    .section-label {
+      display: inline-block;
+      color: var(--gold);
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      color: var(--text-dark);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .section-sub {
+      color: var(--text-muted);
+      font-size: 1rem;
+      max-width: 520px;
+      line-height: 1.7;
+      margin-bottom: 3rem;
+      font-weight: 400;
+    }
+
+    /* HOW IT WORKS */
+    .how-bg {
+      background: var(--white);
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+
+    .step-card {
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      border-radius: var(--radius-lg);
+      background: var(--cream);
+      position: relative;
+      border: 1px solid rgba(201, 168, 76, 0.1);
+      transition: transform 0.2s;
+    }
+
+    .step-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .step-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      color: rgba(201, 168, 76, 0.15);
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .step-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .step-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text-dark);
+    }
+
+    .step-card p {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* PRACTICE AREAS */
+    .areas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+    }
+
+    .area-card {
+      padding: 1.75rem 1.25rem;
+      border-radius: var(--radius);
+      border: 1px solid rgba(201, 168, 76, 0.12);
+      background: var(--white);
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .area-card:hover {
+      background: var(--navy);
+      border-color: var(--navy);
+    }
+
+    .area-card:hover .area-icon,
+    .area-card:hover .area-name {
+      color: var(--white);
+    }
+
+    .area-card:hover .area-num {
+      color: var(--gold);
+    }
+
+    .area-icon {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+      display: block;
+      color: var(--navy);
+      transition: color 0.2s;
+    }
+
+    .area-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text-dark);
+      margin-bottom: 0.25rem;
+      transition: color 0.2s;
+    }
+
+    .area-num {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      transition: color 0.2s;
+    }
+
+    /* LAWYERS */
+    .lawyers-bg {
+      background: var(--white);
+    }
+
+    .lawyers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .lawyer-card {
+      border: 1px solid rgba(201, 168, 76, 0.12);
+      border-radius: var(--radius-lg);
+      background: var(--cream);
+      overflow: hidden;
+      transition: all 0.25s;
+    }
+
+    .lawyer-card:hover {
+      box-shadow: 0 8px 30px rgba(15, 30, 53, 0.12);
+      transform: translateY(-3px);
+    }
+
+    .lawyer-avatar {
+      height: 140px;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: var(--gold);
+      font-weight: 700;
+      position: relative;
+    }
+
+    .lawyer-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(201, 168, 76, 0.2);
+      border: 1px solid rgba(201, 168, 76, 0.4);
+      color: var(--gold);
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.25rem 0.6rem;
+      border-radius: 100px;
+    }
+
+    .lawyer-info {
+      padding: 1.25rem;
+    }
+
+    .lawyer-name {
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+      color: var(--text-dark);
+    }
+
+    .lawyer-spec {
+      font-size: 0.8rem;
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: 0.75rem;
+    }
+
+    .lawyer-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .lawyer-rating {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .lawyer-fee {
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .book-btn {
+      width: 100%;
+      background: var(--navy);
+      color: var(--white);
+      border: none;
+      padding: 0.65rem;
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .book-btn:hover {
+      background: var(--navy-light);
+    }
+
+    /* FEATURES */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-card {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      border: 1px solid rgba(201, 168, 76, 0.1);
+      background: var(--white);
+    }
+
+    .feature-icon-wrap {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: rgba(201, 168, 76, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    .feature-text h3 {
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .feature-text p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* TESTIMONIALS */
+    .testimonials-bg {
+      background: var(--navy);
+    }
+
+    .testimonials-bg .section-title {
+      color: var(--white);
+    }
+
+    .testimonials-bg .section-label {
+      color: var(--gold);
+    }
+
+    .testimonials-bg .section-sub {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .testi-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(201, 168, 76, 0.15);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+    }
+
+    .stars {
+      color: var(--gold);
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+      letter-spacing: 2px;
+    }
+
+    .testi-text {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.9rem;
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+      font-style: italic;
+    }
+
+    .testi-author {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .testi-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(201, 168, 76, 0.2);
+      border: 1px solid rgba(201, 168, 76, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--gold);
+    }
+
+    .testi-name {
+      font-weight: 600;
+      font-size: 0.875rem;
+      color: var(--white);
+    }
+
+    .testi-role {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.45);
+    }
+
+    /* CTA */
+    .cta-section {
+      background: var(--gold);
+      text-align: center;
+      padding: 5rem 8%;
+    }
+
+    .cta-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      color: var(--navy);
+      margin-bottom: 1rem;
+    }
+
+    .cta-section p {
+      color: rgba(15, 30, 53, 0.7);
+      font-size: 1rem;
+      max-width: 480px;
+      margin: 0 auto 2rem;
+      line-height: 1.6;
+    }
+
+    .btn-navy {
+      background: var(--navy);
+      color: var(--white);
+      border: none;
+      padding: 0.9rem 2.25rem;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: all 0.2s;
+    }
+
+    .btn-navy:hover {
+      background: var(--navy-light);
+      transform: translateY(-1px);
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--navy);
+      padding: 4rem 8% 2rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+      font-weight: 700;
+    }
+
+    .footer-desc {
+      color: rgba(255, 255, 255, 0.45);
+      font-size: 0.85rem;
+      line-height: 1.7;
+    }
+
+    .footer-col h4 {
+      color: var(--white);
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col li {
+      margin-bottom: 0.6rem;
+    }
+
+    .footer-col a {
+      color: rgba(255, 255, 255, 0.45);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover {
+      color: var(--gold);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: gap;
+    }
+
+    .footer-copy {
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 0.8rem;
+    }
+
+    .footer-badges {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .badge {
+      background: rgba(201, 168, 76, 0.1);
+      border: 1px solid rgba(201, 168, 76, 0.2);
+      color: rgba(201, 168, 76, 0.7);
+      font-size: 0.7rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: 100px;
+    }
+
+    /* MODAL */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      width: 90%;
+      max-width: 480px;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    .modal h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .modal .sub {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-bottom: 1.75rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 0.4rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      border-radius: 8px;
+      padding: 0.7rem 0.9rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      background: var(--cream);
+      outline: none;
+      transition: border 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--gold);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .modal-submit {
+      width: 100%;
+      padding: 0.9rem;
+      background: var(--navy);
+      color: var(--white);
+      border: none;
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: background 0.2s;
+    }
+
+    .modal-submit:hover {
+      background: var(--navy-light);
+    }
+
+    .success-msg {
+      display: none;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    .success-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .success-msg h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .success-msg p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .search-divider {
+        display: none;
+      }
+
+      .hero {
+        padding: 6rem 5% 3rem;
+      }
+
+      section {
+        padding: 3.5rem 5%;
+      }
+
+      .hero-stats {
+        gap: 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo">Lexora<span>Law</span></div>
+    <ul class="nav-links">
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#areas">Practice Areas</a></li>
+      <li><a href="#lawyers">Find Lawyers</a></li>
+      <li><a href="#features">Why Us</a></li>
+    </ul>
+    <div class="nav-cta">
+      <button class="btn-ghost" onclick="openModal('login')">Sign in</button>
+      <button class="btn-gold" onclick="openModal('register')">Get Started</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-tag">⚖️ Trusted Legal Consultation Platform</div>
+    <h1>Expert Legal Advice,<br /><em>Whenever You Need It</em></h1>
+    <p>Connect with verified lawyers across civil, criminal, family, corporate & property law — from the comfort of your
+      home.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="openModal('book')">Book a Consultation</button>
+      <button class="btn-outline"
+        onclick="document.getElementById('lawyers').scrollIntoView({behavior:'smooth'})">Browse Lawyers →</button>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">2,400+</div>
+        <div class="stat-label">Verified Lawyers</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">18,000+</div>
+        <div class="stat-label">Cases Resolved</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">4.8★</div>
+        <div class="stat-label">Average Rating</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">50+</div>
+        <div class="stat-label">Cities Covered</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEARCH -->
+  <div class="search-section">
+    <div class="search-box">
+      <div class="search-field">
+        <label>Legal Domain</label>
+        <select>
+          <option>All Areas</option>
+          <option>Civil Law</option>
+          <option>Criminal Law</option>
+          <option>Family Law</option>
+          <option>Corporate Law</option>
+          <option>Property Law</option>
+          <option>Labour Law</option>
+        </select>
+      </div>
+      <div class="search-divider"></div>
+      <div class="search-field">
+        <label>Location</label>
+        <input type="text" placeholder="City or PIN code" />
+      </div>
+      <div class="search-divider"></div>
+      <div class="search-field">
+        <label>Consultation Type</label>
+        <select>
+          <option>Any Mode</option>
+          <option>Video Call</option>
+          <option>Audio Call</option>
+          <option>Chat</option>
+        </select>
+      </div>
+      <div class="search-divider"></div>
+      <div class="search-field">
+        <label>Fee Range</label>
+        <select>
+          <option>Any Budget</option>
+          <option>Under ₹500</option>
+          <option>₹500 – ₹2000</option>
+          <option>Above ₹2000</option>
+        </select>
+      </div>
+      <button class="search-btn" onclick="document.getElementById('lawyers').scrollIntoView({behavior:'smooth'})">Search
+        Lawyers</button>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-bg" id="how">
+    <div class="section-label">Process</div>
+    <div class="section-title">Simple. Fast. Confidential.</div>
+    <div class="section-sub">Get legal help in four easy steps — no office visits required.</div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <div class="step-icon">📋</div>
+        <h3>Register & Describe</h3>
+        <p>Create your account and tell us about your legal concern in minutes.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <div class="step-icon">🔍</div>
+        <h3>Find the Right Lawyer</h3>
+        <p>Browse verified profiles filtered by specialization, experience & fees.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <div class="step-icon">📅</div>
+        <h3>Book a Slot</h3>
+        <p>Pick a convenient time and choose your preferred mode — video, audio, or chat.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">04</div>
+        <div class="step-icon">💬</div>
+        <h3>Consult & Get Clarity</h3>
+        <p>Receive expert legal advice and a saved consultation summary.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRACTICE AREAS -->
+  <section id="areas">
+    <div class="section-label">Domains</div>
+    <div class="section-title">Every Legal Domain, One Platform</div>
+    <div class="section-sub">From personal disputes to corporate matters — our verified lawyers cover it all.</div>
+    <div class="areas-grid">
+      <div class="area-card"><span class="area-icon">⚖️</span>
+        <div class="area-name">Civil Law</div>
+        <div class="area-num">340 Lawyers</div>
+      </div>
+      <div class="area-card"><span class="area-icon">🚨</span>
+        <div class="area-name">Criminal Law</div>
+        <div class="area-num">210 Lawyers</div>
+      </div>
+      <div class="area-card"><span class="area-icon">👨‍👩‍👧</span>
+        <div class="area-name">Family Law</div>
+        <div class="area-num">185 Lawyers</div>
+      </div>
+      <div class="area-card"><span class="area-icon">🏢</span>
+        <div class="area-name">Corporate Law</div>
+        <div class="area-num">270 Lawyers</div>
+      </div>
+      <div class="area-card"><span class="area-icon">🏠</span>
+        <div class="area-name">Property Law</div>
+        <div class="area-num">295 Lawyers</div>
+      </div>
+      <div class="area-card"><span class="area-icon">💼</span>
+        <div class="area-name">Labour Law</div>
+        <div class="area-num">160 Lawyers</div>
+      </div>
+      <div class="area-card"><span class="area-icon">💡</span>
+        <div class="area-name">IP & Patents</div>
+        <div class="area-num">95 Lawyers</div>
+      </div>
+      <div class="area-card"><span class="area-icon">🌐</span>
+        <div class="area-name">Cyber Law</div>
+        <div class="area-num">78 Lawyers</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED LAWYERS -->
+  <section class="lawyers-bg" id="lawyers">
+    <div class="section-label">Our Experts</div>
+    <div class="section-title">Meet Our Top Lawyers</div>
+    <div class="section-sub">Every lawyer is bar-council verified, reviewed, and background checked.</div>
+    <div class="lawyers-grid">
+      <div class="lawyer-card">
+        <div class="lawyer-avatar">AK<div class="lawyer-badge">✓ Verified</div>
+        </div>
+        <div class="lawyer-info">
+          <div class="lawyer-name">Adv. Anita Krishnan</div>
+          <div class="lawyer-spec">Family & Civil Law</div>
+          <div class="lawyer-meta"><span class="lawyer-rating">★ 4.9 (218)</span><span>15 yrs exp</span></div>
+          <div class="lawyer-meta"><span class="lawyer-fee">₹1,200 / session</span><span>📹 Video</span></div>
+          <button class="book-btn" onclick="openModal('book')">Book Consultation</button>
+        </div>
+      </div>
+      <div class="lawyer-card">
+        <div class="lawyer-avatar" style="background:#162844;">RS<div class="lawyer-badge">✓ Verified</div>
+        </div>
+        <div class="lawyer-info">
+          <div class="lawyer-name">Adv. Rajan Sharma</div>
+          <div class="lawyer-spec">Corporate & Tax Law</div>
+          <div class="lawyer-meta"><span class="lawyer-rating">★ 4.8 (304)</span><span>22 yrs exp</span></div>
+          <div class="lawyer-meta"><span class="lawyer-fee">₹2,500 / session</span><span>📹 Video</span></div>
+          <button class="book-btn" onclick="openModal('book')">Book Consultation</button>
+        </div>
+      </div>
+      <div class="lawyer-card">
+        <div class="lawyer-avatar" style="background:#1a2d4a;">PM<div class="lawyer-badge">✓ Verified</div>
+        </div>
+        <div class="lawyer-info">
+          <div class="lawyer-name">Adv. Priya Mehta</div>
+          <div class="lawyer-spec">Criminal Law</div>
+          <div class="lawyer-meta"><span class="lawyer-rating">★ 4.9 (187)</span><span>11 yrs exp</span></div>
+          <div class="lawyer-meta"><span class="lawyer-fee">₹900 / session</span><span>💬 Chat</span></div>
+          <button class="book-btn" onclick="openModal('book')">Book Consultation</button>
+        </div>
+      </div>
+      <div class="lawyer-card">
+        <div class="lawyer-avatar" style="background:#0d1f36;">VN<div class="lawyer-badge">✓ Verified</div>
+        </div>
+        <div class="lawyer-info">
+          <div class="lawyer-name">Adv. Vikram Nair</div>
+          <div class="lawyer-spec">Property & Land Law</div>
+          <div class="lawyer-meta"><span class="lawyer-rating">★ 4.7 (261)</span><span>18 yrs exp</span></div>
+          <div class="lawyer-meta"><span class="lawyer-fee">₹1,800 / session</span><span>📞 Audio</span></div>
+          <button class="book-btn" onclick="openModal('book')">Book Consultation</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features">
+    <div class="section-label">Why Lexora</div>
+    <div class="section-title">Built for Trust & Transparency</div>
+    <div class="section-sub">Everything you need for safe, reliable, and private legal consultations.</div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon-wrap">🛡️</div>
+        <div class="feature-text">
+          <h3>Verified Lawyers Only</h3>
+          <p>Bar Council ID, credentials & reviews verified before any lawyer goes live on the platform.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon-wrap">🔒</div>
+        <div class="feature-text">
+          <h3>Secure & Confidential</h3>
+          <p>End-to-end encrypted consultations. Your data is private and compliant with data protection laws.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon-wrap">📱</div>
+        <div class="feature-text">
+          <h3>Multi-Mode Consultation</h3>
+          <p>Video, audio, or chat — choose what suits you best for every kind of legal need.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon-wrap">📂</div>
+        <div class="feature-text">
+          <h3>Document Sharing</h3>
+          <p>Securely upload and share case documents directly within your consultation session.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon-wrap">🗓️</div>
+        <div class="feature-text">
+          <h3>Flexible Scheduling</h3>
+          <p>Book appointments at your convenience — mornings, evenings, or weekends.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon-wrap">📊</div>
+        <div class="feature-text">
+          <h3>Consultation History</h3>
+          <p>Access your full case history, summaries, and follow-up notes anytime, anywhere.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials-bg">
+    <div class="section-label">Reviews</div>
+    <div class="section-title">What Our Clients Say</div>
+    <div class="section-sub">Real stories from people who found clarity through Lexora.</div>
+    <div class="testimonials-grid">
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <div class="testi-text">"I was confused about my property dispute for months. Within one session with Adv. Nair,
+          I had a clear action plan. Remarkable service."</div>
+        <div class="testi-author">
+          <div class="testi-avatar">SK</div>
+          <div>
+            <div class="testi-name">Suresh Kapoor</div>
+            <div class="testi-role">Property Dispute Client</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <div class="testi-text">"As a startup founder, finding corporate law advice used to be expensive and slow.
+          Lexora connected me with an expert in under 2 hours."</div>
+        <div class="testi-author">
+          <div class="testi-avatar">NP</div>
+          <div>
+            <div class="testi-name">Neha Patel</div>
+            <div class="testi-role">Startup Founder</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★☆</div>
+        <div class="testi-text">"The verified badge system gave me confidence I was speaking to a real professional. My
+          family law matter was handled with great sensitivity."</div>
+        <div class="testi-author">
+          <div class="testi-avatar">MR</div>
+          <div>
+            <div class="testi-name">Meena Rajan</div>
+            <div class="testi-role">Family Law Client</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <h2>Ready to Get Legal Clarity?</h2>
+    <p>Join thousands who resolved their legal concerns without leaving home. Your first consultation is just a click
+      away.</p>
+    <button class="btn-navy" onclick="openModal('book')">Book Your Free Consultation</button>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">LexoraLaw</div>
+        <div class="footer-desc">India's trusted online legal consultation platform — connecting people with verified
+          lawyers across every domain.</div>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="#">How It Works</a></li>
+          <li><a href="#">Practice Areas</a></li>
+          <li><a href="#">Find Lawyers</a></li>
+          <li><a href="#">Pricing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Disclaimer</a></li>
+          <li><a href="#">Cookie Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 LexoraLaw. All rights reserved.</div>
+      <div class="footer-badges">
+        <span class="badge">🔒 SSL Secured</span>
+        <span class="badge">✓ Bar Council Verified</span>
+        <span class="badge">🇮🇳 Made in India</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BOOK CONSULTATION MODAL -->
+  <div class="modal-overlay" id="modal-book">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('book')">✕</button>
+      <div id="book-form-wrap">
+        <h2>Book a Consultation</h2>
+        <p class="sub">Fill in your details and we'll match you with the right lawyer.</p>
+        <div class="form-group"><label>Full Name</label><input type="text" placeholder="Your full name" /></div>
+        <div class="form-row">
+          <div class="form-group"><label>Phone</label><input type="tel" placeholder="+91 XXXXX XXXXX" /></div>
+          <div class="form-group"><label>Email</label><input type="email" placeholder="you@email.com" /></div>
+        </div>
+        <div class="form-group"><label>Legal Domain</label>
+          <select>
+            <option>Select domain</option>
+            <option>Civil Law</option>
+            <option>Criminal Law</option>
+            <option>Family Law</option>
+            <option>Corporate Law</option>
+            <option>Property Law</option>
+            <option>Labour Law</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Preferred Date</label><input type="date" /></div>
+          <div class="form-group"><label>Consultation Mode</label><select>
+              <option>Video Call</option>
+              <option>Audio Call</option>
+              <option>Chat</option>
+            </select></div>
+        </div>
+        <div class="form-group"><label>Brief Description</label><textarea rows="3"
+            placeholder="Describe your legal concern briefly..."></textarea></div>
+        <button class="modal-submit" onclick="submitBooking()">Confirm Booking</button>
+      </div>
+      <div class="success-msg" id="book-success">
+        <div class="success-icon">✅</div>
+        <h3>Booking Confirmed!</h3>
+        <p>We'll match you with the best lawyer and send confirmation to your email within minutes.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- REGISTER MODAL -->
+  <div class="modal-overlay" id="modal-register">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('register')">✕</button>
+      <h2>Create Account</h2>
+      <p class="sub">Join LexoraLaw — free to register.</p>
+      <div class="form-row">
+        <div class="form-group"><label>First Name</label><input type="text" placeholder="First name" /></div>
+        <div class="form-group"><label>Last Name</label><input type="text" placeholder="Last name" /></div>
+      </div>
+      <div class="form-group"><label>Email</label><input type="email" placeholder="you@email.com" /></div>
+      <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="+91 XXXXX XXXXX" /></div>
+      <div class="form-group"><label>Password</label><input type="password" placeholder="Create a password" /></div>
+      <div class="form-group"><label>I am registering as</label>
+        <select>
+          <option>Client (seeking legal advice)</option>
+          <option>Lawyer (offering legal services)</option>
+        </select>
+      </div>
+      <button class="modal-submit" onclick="closeModal('register')">Create My Account</button>
+    </div>
+  </div>
+
+  <!-- LOGIN MODAL -->
+  <div class="modal-overlay" id="modal-login">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('login')">✕</button>
+      <h2>Welcome Back</h2>
+      <p class="sub">Sign in to your LexoraLaw account.</p>
+      <div class="form-group"><label>Email</label><input type="email" placeholder="you@email.com" /></div>
+      <div class="form-group"><label>Password</label><input type="password" placeholder="Your password" /></div>
+      <button class="modal-submit" onclick="closeModal('login')">Sign In</button>
+      <p style="text-align:center; font-size:0.85rem; color:var(--text-muted); margin-top:1rem;">Don't have an account?
+        <a href="#" onclick="closeModal('login');openModal('register');"
+          style="color:var(--navy); font-weight:600;">Register here</a></p>
+    </div>
+  </div>
+
+  <script>
+    function openModal(type) {
+      document.getElementById('modal-' + type).classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal(type) {
+      document.getElementById('modal-' + type).classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function submitBooking() {
+      document.getElementById('book-form-wrap').style.display = 'none';
+      document.getElementById('book-success').style.display = 'block';
+      setTimeout(() => { closeModal('book'); document.getElementById('book-form-wrap').style.display = 'block'; document.getElementById('book-success').style.display = 'none'; }, 3000);
+    }
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+      overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) {
+          overlay.classList.remove('open');
+          document.body.style.overflow = '';
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
